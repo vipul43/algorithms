@@ -76,6 +76,9 @@ def search4(arr: List[int], key: int, L: int, R: int) -> int:
         IS IN THE ARRAY ELSE FALSE
         
         NOTE: FINDING THE MIDDLE ELEMENT IS DONE THAT WAY TO AVOID OVERFLOW.
+        
+        NOTE: bisect_left() OR bisect_right() FUNCTIONS OF bisect MODULE
+        SEARCHES FOR AN ELEMENT IN ARRAY IN O(log(n)) TIME COMPLEXITY.
     
     """
     

@@ -76,6 +76,8 @@ def isPrime4(n: int) -> bool:
             OR 6k-1 or 6k+1.
             SO WE CHECK DIVISIBLITY BY NUMBERS OF THIS FORMS ONLY.
             HERE i IS ALWAYS OF FORM 6k-1. AND i+2 OF FORM 6k+1.
+            
+        NOTE: isprime() IS A FUNCTION IN sympy MODULE WHICH CHECKS THE PRIMALITY.
     """
         
 #RELATED ALGORITHMS:
