@@ -18,7 +18,7 @@ int search1(int arr[], int key) {
     return -1;
 }
 
-//SOLUTION-2: (ITERATIVE_ALGORITHM) --> O(log(n))
+//SOLUTION-2: (ITERATIVE_ALGORITHM) --> O(log2(n))
 int search2(int arr[], int key) {
     int n = sizeof(arr)/sizeof(arr[0]);
     int L = 0;
@@ -38,7 +38,7 @@ int search2(int arr[], int key) {
     return -1;
 }
 
-//SOLUTION-3: (RECURSIVE_ALGORITHM) --> O(log(n))
+//SOLUTION-3: (RECURSIVE_ALGORITHM) --> O(log2(n))
 int search3(int arr[], int key, int L, int R) {
     if (L<=R) {
         int mid = L + (R-L)/2;
@@ -58,6 +58,7 @@ int search3(int arr[], int key, int L, int R) {
 }
 // //DRIVER CODE FOR SOLUTION-3
 // int result = search3(arr, key, 0, n-1);
+
 
 //DESCRIPTION:
     /*
@@ -87,7 +88,44 @@ int search3(int arr[], int key, int L, int R) {
     
     */
     
-    
+
+//APPLICATION-1: (MINIMUM ELEMENT GREATER THAN EQUAL TO key) --> O(log2(n))
+int searchMinGreaterEqualToKey(int arr[], int key) {
+    int n = sizeof(arr)/sizeof(arr[0]);
+    int L = 0;
+    int R = n-1;
+    int ans = -1;                       //+
+    while (L<=R) {
+        int mid = L + (R-L)/2;
+        if(arr[mid]>=key) {             //+
+            ans = mid;                  //+
+            R = mid-1;
+        }
+        else {
+            L = mid+1;
+        }
+    }
+    return ans;
+}
+
+//DESCRIPTION:
+    /*
+        SIMILAR TO BINARY SEARCH LOOK AT THE MIDDLE VALUE IN THE ARRAY, IF IT SATISFIES 
+        OUR CRITERIA(GREATER THAN OR EQUAL TO KEY) THAN LOOK FOR SMALLER ELEMENT THAN 
+        THE MIDDLE ELEMENT TO SATISFY COMPLETE CRITERIA(MINIMUM ELEMENT GREATER THAN OR
+        EQUAL TO KEY).
+        ELSE DEPENDING ON THE VALUE OF THE MIDDLE ELEMENT SEARCH IN LEFT SUB ARRAY(IF 
+        ELEMENT IS GREATER THAN KEY) OR RIGHT SUB ARRAY(IF ELEMENT IS SMALLER THAN KEY).
+        THE CHANGE IN THIS APPLICATION IS WE SHOULD'NT TERMINATE THE WHILE LOOP 
+        IMMEDIATELY AFTER GETTING THE ELEMENT WHICH SATISFIES THE CRITERIA, WE HAVE TO 
+        LOOK FURTHER FOR SMALLER OF ALL THOSE ELEMENTS WHICH SATISFIES THE CRITERIA. 
+
+        NOTE: ADDITIONAL CHANGES MADE TO ACCUSTOM FOR THE PROBLEM STATEMENT ARE MARKED
+        WITH "//+" MEANING INSERTION AND "//-" MEANING DELETION.
+
+    */
+
+
 //RELATED ALGORITHMS:
     /*
         -BINARY SEARCH IN SORTED ROTATED ARRAY
