@@ -21,7 +21,7 @@ def search2(arr: List[int], key: int) -> int:
     except:
         return -1
 
-#SOLUTION-3: (ITERATIVE_ALGORITHM) --> O(log(n))
+#SOLUTION-3: (ITERATIVE_ALGORITHM) --> O(log2(n))
 def search3(arr: List[int], key: int) -> int:
     n = len(arr)
     L = 0
@@ -36,7 +36,7 @@ def search3(arr: List[int], key: int) -> int:
             R = mid - 1
     return -1
 
-#SOLUTION-4: (RECURSIVE_ALGORITHM) --> O(log(n))
+#SOLUTION-4: (RECURSIVE_ALGORITHM) --> O(log2(n))
 def search4(arr: List[int], key: int, L: int, R: int) -> int:
     if L<=R:
         mid = L + (R-L)//2
@@ -81,7 +81,44 @@ def search4(arr: List[int], key: int, L: int, R: int) -> int:
         SEARCHES FOR AN ELEMENT IN ARRAY IN O(log(n)) TIME COMPLEXITY.
     
     """
-    
+
+
+#APPLICATION-1: (MINIMUM ELEMENT GREATER THAN EQUAL TO key) --> O(log2(n))
+def searchMinGreaterEqualToKey(arr: List[arr], key: int) -> int: 
+    n = int(len(arr))
+    L = 0
+    R = n-1
+    ans = -1                        #+
+    while(L<=R):
+        mid = L + (R-L)//2
+        if(arr[mid]>=key):          #+
+            ans = mid               #+
+            R = mid - 1 
+        else:
+            L = mid + 1
+    return ans
+
+
+
+#DESCRIPTION:
+    """
+        SIMILAR TO BINARY SEARCH LOOK AT THE MIDDLE VALUE IN THE ARRAY, IF IT SATISFIES 
+        OUR CRITERIA(GREATER THAN OR EQUAL TO KEY) THAN LOOK FOR SMALLER ELEMENT THAN 
+        THE MIDDLE ELEMENT TO SATISFY COMPLETE CRITERIA(MINIMUM ELEMENT GREATER THAN OR
+        EQUAL TO KEY).
+        ELSE DEPENDING ON THE VALUE OF THE MIDDLE ELEMENT SEARCH IN LEFT SUB ARRAY(IF 
+        ELEMENT IS GREATER THAN KEY) OR RIGHT SUB ARRAY(IF ELEMENT IS SMALLER THAN KEY).
+        THE CHANGE IN THIS APPLICATION IS WE SHOULD'NT TERMINATE THE WHILE LOOP 
+        IMMEDIATELY AFTER GETTING THE ELEMENT WHICH SATISFIES THE CRITERIA, WE HAVE TO 
+        LOOK FURTHER FOR SMALLER OF ALL THOSE ELEMENTS WHICH SATISFIES THE CRITERIA. 
+        ADDITIONAL MODIFICATIONS CAN BE MADE TO RETURN VALUE OF THE KEY ELEMENT INSTEAD.
+
+        NOTE: ADDITIONAL CHANGES MADE TO ACCUSTOM FOR THE PROBLEM STATEMENT ARE MARKED
+        WITH "#+" MEANING INSERTION AND "#-" MEANING DELETION.
+
+    """
+
+
     
 #RELATED ALGORITHMS:
     """
