@@ -1,4 +1,4 @@
-##HEADING: Binary Search Algorithm
+##HEADING: BINARY SEARCH ALGORITHM
 
 #PROBLEM STATEMENT:
 """
