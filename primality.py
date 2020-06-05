@@ -55,7 +55,7 @@ def isPrime4(n: int) -> bool:
         return False
     else:
         i=5
-        while(i<=int(a**0.5)):
+        while(i<=int(n**0.5)):
             if(n%i==0 or n%(i+2)==0):
                 return False
             i=i+6
