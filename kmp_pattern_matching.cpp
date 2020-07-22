@@ -1,5 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
 //HEADING: STRING MATCHING//
 
 //PROBLEM STATEMENT:
@@ -11,7 +9,7 @@ using namespace std;
 */
 
 //SOLUTION-1: (BRUTE_FORCE) --> [O(m(n-m+1))]
-int stringSearch1(string s, string sub_s){
+int stringMatch1(string s, string sub_s){
     int n = s.length();
     int m = sub_s.length();
     int count=0;
@@ -31,7 +29,7 @@ int stringSearch1(string s, string sub_s){
 }
 
 //SOLUTION-2: (KMP ALGORITHM) --> [O(m+n)]
-int stringSearch2(string s, string sub_s){
+int stringMatch2(string s, string sub_s){
     int n = s.length();
     int m = sub_s.length();
 
@@ -104,18 +102,61 @@ int stringSearch2(string s, string sub_s){
 */
     
 
-//APPLICATION-1: ([APPLICATION PROBLEM STATEMENT]) --> [TIME COMPLEXITY LIKE O(n), O(log2(n)), O(n^2), O(sqrt(n)), O(n/2)==O(n), O(n/3)==O(n)]
+//APPLICATION-1: (STRING SEARCHING) --> [O(m+n)]
+bool stringSearch(string s, string sub_s){
+    bool present=false;
+    int n = s.length();
+    int m = sub_s.length();
+
+    int lps[m];
+    int l=0;
+    lps[0]=0;
+    int i=1;
+    while(i<m){
+        if(sub_s[i]==sub_s[l]){
+            l+=1;
+            lps[i]=l;
+            i+=1;
+        } else {
+            if(l!=0){
+                l=lps[l-1];
+            } else {
+                lps[i]=0;
+                i+=1;
+            }
+        }
+    }
+
+    i=0;
+    int j=0;
+    while(i<n){
+        if(s[i]==sub_s[j]){
+            i+=1;
+            j+=1;
+        }
+        if(j==m){
+            present = true;
+            break;
+            j=lps[j-1];
+        } else if(i<n && s[i]!=sub_s[j]){
+            if(j!=0){
+                j=lps[j-1];
+            } else {
+                i+=1;
+            }
+        }
+    }
+    return present;
+}
 
 //APPLICATION-2: ([APPLICATION PROBLEM STATEMENT]) --> [TIME COMPLEXITY LIKE O(n), O(log2(n)), O(n^2), O(sqrt(n)), O(n/2)==O(n), O(n/3)==O(n)]
 
 
 //DESCRIPTION:
 /*
-    [DESCRIPTION LINE1]
-    [DESCRIPTION LINE2]
-    [DESCRIPTION LINE3]
-    [DESCRIPTION LINE4]
-    [DESCRIPTION LINE5]
+    IN THE STRING SEARCHING APPLICATION, INSTEAD OF RETURNING THE COUNT, RETURN A BOOL VALUE WHICH IS TRUE IF THE 
+    SUBSTRING IS PRESENT IN THE STRING.
+    HOW MANY TIMES THE SUBSTRING APPEARS IN THE STRING IS IRRELEVANT HERE.
 
     [NOTE: 1]
 

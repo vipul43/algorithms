@@ -1,4 +1,4 @@
-##HEADING: [PROBLEM NAME]
+##HEADING: STRING MATCHING
 
 #PROBLEM STATEMENT:
 """
@@ -9,7 +9,7 @@
 """
 
 #SOLUTION-1: (BRUTE_FORCE) --> [O(m(n-m+1))]
-def stringSearch1(s: str, sub_s: str) -> int:
+def stringMatch1(s: str, sub_s: str) -> int:
     n = len(s)
     m = len(sub_s)
     count = 0
@@ -24,7 +24,7 @@ def stringSearch1(s: str, sub_s: str) -> int:
     return count
 
 #SOLUTION-2: (KMP ALGORITHM) --> [O(n)]
-def stringSearch2(s: str, sub_s: str) -> int:
+def stringMatch2(s: str, sub_s: str) -> int:
     n = len(s)
     m = len(sub_s)
     
@@ -88,18 +88,52 @@ def stringSearch2(s: str, sub_s: str) -> int:
 """
 
 
-#APPLICATION-1: ([APPLICATION PROBLEM STATEMENT]) --> [TIME COMPLEXITY LIKE O(n), O(log2(n)), O(n^2), O(sqrt(n)), O(n/2)==O(n), O(n/3)==O(n)]
+#APPLICATION-1: (STRING SEARCHING) --> [O(m+n)]
+def stringSearch(s: str, sub_s: str) -> bool:
+    present = False
+    n = len(s)
+    m = len(sub_s)
+    
+    lps=[]
+    l=0
+    lps.append(0)
+    i=1
+    while(i<m):
+        if(sub_s[i]==sub_s[l]):
+            l+=1
+            lps.append(l)
+            i+=1
+        else:
+            if(l!=0):
+                l=lps[l-1]
+            else:
+                lps[i]=0
+                i+=1
+
+    i=0
+    j=0
+    while(i<n):
+        if(s[i]==sub_s[j]):
+            i+=1
+            j+=1
+        if(j==m):
+            present=True
+            j=lps[j-1]
+        elif(i<n and s[i]!=sub_s[j]):
+            if(j!=0):
+                j=lps[j-1]
+            else:
+                i+=1
+    return present
 
 #APPLICATION-2: ([APPLICATION PROBLEM STATEMENT]) --> [TIME COMPLEXITY LIKE O(n), O(log2(n)), O(n^2), O(sqrt(n)), O(n/2)==O(n), O(n/3)==O(n)]
 
 
 #DESCRIPTION:
 """
-    [DESCRIPTION LINE1]
-    [DESCRIPTION LINE2]
-    [DESCRIPTION LINE3]
-    [DESCRIPTION LINE4]
-    [DESCRIPTION LINE5]
+    IN THE STRING SEARCHING APPLICATION, INSTEAD OF RETURNING THE COUNT, RETURN A BOOL VALUE WHICH IS TRUE IF THE 
+    SUBSTRING IS PRESENT IN THE STRING.
+    HOW MANY TIMES THE SUBSTRING APPEARS IN THE STRING IS IRRELEVANT HERE.
 
     [NOTE: 1]
 
