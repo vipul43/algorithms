@@ -126,6 +126,35 @@ int searchMinGreaterEqualToKey(int arr[], int key) {
 
     */
 
+//APPLICATION-2: (FLOOR OF SQUARE ROOT OF INTEGER) --> O(log2(n))
+int squareRoot(int n){
+    int l = 0;
+    int r = n;
+    int ans;
+    while(l<=r){
+        int mid = l + (r-l)/2;
+        if((long long) mid*mid <=n){
+            ans = mid;
+            l = mid+1;
+        } else {
+            r = mid-1;
+	}
+    }
+    return ans;
+}
+
+//DESCRIPTION:
+    /*
+        WE NEED TO SEARCH FOR SQUAREROOT OF n FROM 0 to n. IF n IS PERFECT SQUARE THEN
+        THE ANSWER WOULD BE SQUAREROOT OF n. IF n IS NOT A PERFECT SQUARE THEN THE
+        ANSWER WOULD BE FLOOR OF THE SQUAREROOT OF n. AS USUAL BINARY SEARCH
+        INITIALISATIONS AND WHILE LOOP BUT THE CHECK STATEMENT INSIDE WHILE LOOP IS 
+        FOR mid SQUARED. CHECK FOR THE MAXIMUM ELEMENT THAT SATISFIES THE INEQUALITY
+        mid*mid <= n, THAT WAY IF n IS PERFECT SQUARE THEN WE END UP GETTING 
+        SQUAREROOT OF n. ELSE WHEN THE WHILE LOOP CONDITION IS MET SOME INTEGER
+        WHICH SATISFIES THE INEQUALITY WOULD BE FOUND. THAT IS THE FLOOR OF SQUAREROOT
+        OF n.
+    */
 
 //RELATED ALGORITHMS:
     /*
